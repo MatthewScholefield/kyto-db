@@ -19,9 +19,8 @@ class KytoDbCollection(Generic[T]):
         self.collection_name = collection_name
 
     def add(self, obj: T) -> str:
-        if obj.id != '':
-            raise ValueError('ID must be empty during creation')
-        obj.id = str(uuid.uuid4())
+        if not obj.id:
+            obj.id = str(uuid.uuid4())
         key = self._construct_key(obj.id)
         value = obj.model_dump_json().encode('utf-8')
         self.db.set(key, value)

@@ -31,8 +31,8 @@ def test_add_generates_id_and_stores(collection):
 
 def test_add_raises_if_id_not_empty(collection):
     obj = MyModel(id='123', name='Test Object')
-    with pytest.raises(ValueError):
-        collection.add(obj)
+    obj_id = collection.add(obj)
+    assert obj_id == '123'
 
 
 def test_get_returns_object_if_found(collection):
