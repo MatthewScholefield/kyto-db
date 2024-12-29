@@ -1,6 +1,6 @@
 [project]
 name = "kytodb"
-version = "0.1.0"
+version = "0.2.0"
 description = "A simple, easy-to-use Pydantic embedded database library"
 authors = [
     { name = "Matthew D. Scholefield", email = "matthew331199@gmail.com" },

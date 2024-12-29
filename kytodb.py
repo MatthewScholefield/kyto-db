@@ -34,6 +34,13 @@ class KytoDbCollection(Generic[T]):
             return self.model.model_validate_json(value)
         return None
 
+    def update(self, obj: T):
+        if obj.id == '':
+            raise ValueError('ID must not be empty during update')
+        key = self._construct_key(obj.id)
+        value = obj.model_dump_json().encode('utf-8')
+        self.db.set(key, value)
+
     def _construct_key(self, obj_id: str) -> bytes:
         return f'{self.collection_name}:{self.model.__name__}:{obj_id}'.encode('utf-8')
 
